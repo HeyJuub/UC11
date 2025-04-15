@@ -1,8 +1,39 @@
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
+
 public class cadastroVIEW extends javax.swing.JFrame {
+    private Connection conn;
+    private conectaDAO conecta = new conectaDAO();
 
     public cadastroVIEW() {
         initComponents();
+        conn = conecta.connectDB();
+    }
+    
+    private void salvarItens(){
+        try{
+            String nome = cadastroNome.getText();
+            String valor = cadastroValor.getText();
+            String status = "A Venda";
+            double valorReal = (Double.parseDouble(valor));
+
+            String sql = "insert into ProdutosDTO (nome, valor, status) values (?, ?, ?)";
+            PreparedStatement preSt = conn.prepareStatement(sql);
+            preSt.setString(1, nome);
+            preSt.setDouble(2, valorReal);
+            preSt.setString(3,status);
+            
+            preSt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null,"Dados inseridos com sucesso");
+        }
+        catch(SQLException sqle){
+            JOptionPane.showMessageDialog(null, "Erro ao inserir dados"+sqle.getMessage());
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -119,22 +150,11 @@ public class cadastroVIEW extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cadastroNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroNomeActionPerformed
-        
-        
+            
     }//GEN-LAST:event_cadastroNomeActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        ProdutosDTO produto = new ProdutosDTO();
-        String nome = cadastroNome.getText();
-        String valor = cadastroValor.getText();
-        String status = "A Venda";
-        produto.setNome(nome);
-        produto.setValor(Integer.parseInt(valor));
-        produto.setStatus(status);
-        
-        ProdutosDAO produtodao = new ProdutosDAO();
-        produtodao.cadastrarProduto(produto);
-        
+        salvarItens();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
