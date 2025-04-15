@@ -29,6 +29,8 @@ public class cadastroVIEW extends javax.swing.JFrame {
             
             preSt.executeUpdate();
             
+            conn.close();
+            
             JOptionPane.showMessageDialog(null,"Dados inseridos com sucesso");
         }
         catch(SQLException sqle){
