@@ -17,6 +17,10 @@ import java.util.ArrayList;
 
 public class ProdutosDAO {
     
+    public static void main(String[]args){
+        cadastroVIEW cVIEW = new cadastroVIEW();
+    }
+            
     Connection conn;
     PreparedStatement prep;
     ResultSet resultset;
