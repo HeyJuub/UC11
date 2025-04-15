@@ -1,12 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 
-/**
- *
- * @author Adm
- */
 
 import java.sql.PreparedStatement;
 import java.sql.Connection;
@@ -17,7 +9,7 @@ import java.util.ArrayList;
 
 public class ProdutosDAO {
     
-    public static void main(String[]args){
+    public static void main(String[]args){//MÉTODO MAIN PARA DEFINIR QUE "cadastroVIEW" ABRA PRIMEIRO 
         cadastroVIEW cVIEW = new cadastroVIEW();
     }
             
