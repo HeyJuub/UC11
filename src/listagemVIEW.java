@@ -20,7 +20,7 @@ public class listagemVIEW extends javax.swing.JFrame {
     
     private void listarProdutos(){
         try{
-            String sql = "select * from ProdutosDTO";
+            String sql = "select * from ProdutosDAO";
             PreparedStatement preSt = conn.prepareStatement(sql);
             ResultSet rs = preSt.executeQuery();
             
@@ -47,7 +47,7 @@ public class listagemVIEW extends javax.swing.JFrame {
             
             if(linhaSelecionada != -1){
                 Object id = listaProdutos.getModel().getValueAt(linhaSelecionada, 0);
-                String sql = "update ProdutosDTO set status = ? where id = ?";
+                String sql = "update ProdutosDAO set status = ? where id = ?";
                 PreparedStatement preSt = conn.prepareCall(sql);
                 preSt.setString(1, "Vendido");
                 preSt.setInt(2, (int) id);
@@ -59,9 +59,7 @@ public class listagemVIEW extends javax.swing.JFrame {
             else{
                 JOptionPane.showMessageDialog(null, "Selecione um produto para vender");
             }
-            
             conn.close();
-            
         }
         catch(SQLException sqle){
             JOptionPane.showMessageDialog(null, "Erro ao vender item selecionado"+sqle.getMessage());
@@ -76,7 +74,7 @@ public class listagemVIEW extends javax.swing.JFrame {
                 listarProdutos();  
             }
             else{
-                String sql = "select * from ProdutosDTO where id = ?";
+                String sql = "select * from ProdutosDAO where id = ?";
                 PreparedStatement preSt = conn.prepareStatement(sql);
                 preSt.setString(1, pesquisa);
                 ResultSet rs = preSt.executeQuery();
@@ -98,7 +96,6 @@ public class listagemVIEW extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro ao filtrar pesquisa por id");
         }
     }
-
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -219,8 +216,8 @@ public class listagemVIEW extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
-        //vendasVIEW vendas = new vendasVIEW(); 
-        //vendas.setVisible(true);
+        vendasVIEW vendas = new vendasVIEW(); 
+        vendas.setVisible(true);
     }//GEN-LAST:event_btnVendasActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
