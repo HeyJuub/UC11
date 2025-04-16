@@ -35,11 +35,36 @@ public class listagemVIEW extends javax.swing.JFrame {
                     rs.getString("status")
                 });
             }
-            
-            conn.close();
         }
         catch(SQLException sqle){
            JOptionPane.showMessageDialog(null, "Erro ao exibir dados na tabela" +sqle.getMessage());
+        }
+    }
+    
+    private void venderProdutos(){
+        try{
+            int linhaSelecionada = listaProdutos.getSelectedRow();
+            
+            if(linhaSelecionada != -1){
+                Object id = listaProdutos.getModel().getValueAt(linhaSelecionada, 0);
+                String sql = "update ProdutosDTO set status = ? where id = ?";
+                PreparedStatement preSt = conn.prepareCall(sql);
+                preSt.setString(1, "Vendido");
+                preSt.setInt(2, (int) id);
+                preSt.executeUpdate();
+                
+                listarProdutos();
+                JOptionPane.showMessageDialog(null, "Produto vendido com sucesso");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Selecione um produto para vender");
+            }
+            
+            conn.close();
+            
+        }
+        catch(SQLException sqle){
+            JOptionPane.showMessageDialog(null, "Erro ao vender item selecionado"+sqle.getMessage());
         }
     }
     
@@ -153,7 +178,7 @@ public class listagemVIEW extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
-
+        venderProdutos();
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
